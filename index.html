@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SciLab: interactive science simulations</title>
+<meta name="description" content="38 free, hands-on science experiments in physics, chemistry, astronomy, biology, electricity and math. Drag, tweak and break things in your browser.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%AA%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Figtree:wght@400;600&display=swap">
+<style>
+:root{--bg:#eef3ee;--grid:#d9e3d9;--ink:#14213d;--mut:#56637a;--card:#fff;--line:#c4d1c4;--cop:#e4572e;--teal:#1b998b;--gold:#f2c14e;--sky:#3a86ff;--cv:#fbfdfb;--cta:#14213d;--ctat:#eef3ee;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1a2b;--grid:#182640;--ink:#e8eefc;--mut:#9fb0cf;--card:#16233a;--line:#2a3b5c;--cv:#0c1524;--cta:#16233a;--ctat:#e8eefc;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f1a2b;--grid:#182640;--ink:#e8eefc;--mut:#9fb0cf;--card:#16233a;--line:#2a3b5c;--cv:#0c1524;--cta:#16233a;--ctat:#e8eefc;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 Figtree,system-ui,sans-serif;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:32px 32px}
+h1,h2,h3{font-family:'Bricolage Grotesque',Figtree,sans-serif;margin:0;line-height:1.04;letter-spacing:-.03em}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:20px 0}
+.brand{display:flex;align-items:center;gap:10px;font:800 26px 'Bricolage Grotesque',sans-serif;letter-spacing:-.02em;text-decoration:none}
+.logo{width:34px;height:34px}
+.nl{display:flex;align-items:center;gap:22px;font-weight:600}
+.nl a.t{text-decoration:none}.nl a.t:hover{text-decoration:underline;text-underline-offset:4px}
+@media(max-width:640px){.nl a.t{display:none}}
+.btn{display:inline-block;border:2px solid var(--ink);background:var(--gold);color:#14213d;font:700 16px Figtree,sans-serif;padding:11px 22px;border-radius:12px;text-decoration:none;box-shadow:4px 4px 0 var(--ink);transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.btn.alt{background:var(--card);color:var(--ink)}
+.btn.sm{padding:7px 16px;font-size:15px;box-shadow:3px 3px 0 var(--ink)}
+:focus-visible{outline:3px solid var(--sky);outline-offset:3px}
+.hero{display:grid;grid-template-columns:1.05fr 1fr;gap:40px;align-items:center;padding:36px 0 64px}
+@media(max-width:880px){.hero{grid-template-columns:1fr;padding-top:12px}}
+.hero h1{font-size:clamp(46px,7.4vw,92px);font-weight:800}
+.hero p{font-size:20px;color:var(--mut);max-width:480px;margin:20px 0 28px}
+.row{display:flex;gap:14px;flex-wrap:wrap}
+.stage{background:var(--cv);border:2px solid var(--ink);border-radius:6px 26px 6px 26px;box-shadow:7px 7px 0 var(--ink);overflow:hidden}
+.stage canvas{display:block;width:100%;height:400px;touch-action:manipulation;cursor:pointer}
+.stage figcaption{padding:10px 16px;border-top:2px solid var(--ink);font-size:14px;color:var(--mut)}
+section{padding:56px 0}
+.sh{max-width:620px;margin-bottom:30px}
+.sh h2{font-size:clamp(32px,4.6vw,52px);font-weight:800}
+.sh p{color:var(--mut);margin:12px 0 0}
+.subs{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px}
+.sub{display:block;text-decoration:none;background:var(--card);border:2px solid var(--ink);border-radius:6px 18px 6px 18px;padding:16px 16px 14px;border-top-width:10px;transition:transform .15s}
+.sub:hover{transform:translateY(-3px)}
+.sub b{font:800 22px 'Bricolage Grotesque',sans-serif;display:block}
+.sub span{color:var(--mut);font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px}
+.card{display:flex;flex-direction:column;background:var(--card);border:2px solid var(--ink);border-radius:6px 22px 6px 22px;overflow:hidden;text-decoration:none;box-shadow:5px 5px 0 var(--ink);transition:transform .15s,box-shadow .15s}
+.card:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 var(--ink)}
+.thumb{height:130px;border-bottom:2px solid var(--ink)}
+.card .b{padding:14px 18px 18px}
+.card h3{font-size:23px;margin-bottom:2px}
+.tag{font-size:13px;font-weight:600}
+.card p{margin:8px 0 0;font-size:15px;color:var(--mut)}
+.why{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:34px}
+.why h3{font-size:25px;margin-bottom:8px}
+.why p{margin:0;color:var(--mut)}
+.why div{border-left:5px solid var(--teal);padding-left:18px}
+.why div:nth-child(2){border-color:var(--cop)}.why div:nth-child(3){border-color:var(--gold)}
+.cta{background:var(--cta);color:var(--ctat);border-radius:6px 34px 6px 34px;padding:54px 34px;text-align:center;margin:30px 0 60px}
+.cta h2{font-size:clamp(34px,5vw,60px);font-weight:800}
+.cta p{opacity:.8;margin:14px auto 26px;max-width:460px}
+.cta .btn{box-shadow:4px 4px 0 var(--gold);border-color:var(--gold)}
+footer{border-top:2px dashed var(--line);padding:22px 0 34px;color:var(--mut);font-size:14px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+@media(prefers-reduced-motion:reduce){.btn,.card,.sub{transition:none}html{scroll-behavior:auto}}
+</style></head>
+<body>
+<div class="wrap">
+<nav><a class="brand" href="./"><svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><path d="M15 4h10M17 4v12L6 33a3 3 0 0 0 3 4h22a3 3 0 0 0 3-4L23 16V4" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><circle cx="16" cy="29" r="3" fill="#e4572e"/><circle cx="25" cy="31" r="2" fill="#1b998b"/></svg>SciLab</a>
+<div class="nl"><a class="t" href="#subjects">Subjects</a><a class="t" href="#featured">Experiments</a><a class="btn sm" href="app.html">Open SciLab</a></div></nav>
+
+<header class="hero">
+ <div>
+  <h1>Science you can poke.</h1>
+  <p>Free, hands-on simulations for physics, chemistry, astronomy, biology, electricity and math. Drag a pendulum, heat a gas, launch a planet. No sign-up, no install.</p>
+  <div class="row"><a class="btn" href="app.html">Start exploring</a><a class="btn alt" href="#featured">See what’s inside</a></div>
+ </div>
+ <figure class="stage" style="margin:0"><canvas id="hero" aria-label="A double pendulum swinging chaotically. Tap to restart it."></canvas><figcaption>Live demo: a double pendulum. Tap the stage to swing it a new way.</figcaption></figure>
+</header>
+
+<section id="subjects">
+ <div class="sh"><h2>38 experiments, six subjects</h2><p>Each one has sliders you can type into, live readouts and a prompt to get you thinking.</p></div>
+ <div class="subs">
+  <a class="sub" href="app.html" style="border-top-color:#e4572e"><b>Physics</b><span>14 experiments</span></a>
+  <a class="sub" href="app.html" style="border-top-color:#1b998b"><b>Chemistry</b><span>6 experiments</span></a>
+  <a class="sub" href="app.html" style="border-top-color:#7b5cd6"><b>Astronomy</b><span>7 experiments</span></a>
+  <a class="sub" href="app.html" style="border-top-color:#2f9e44"><b>Biology</b><span>5 experiments</span></a>
+  <a class="sub" href="app.html" style="border-top-color:#d99a00"><b>Math</b><span>4 experiments</span></a>
+  <a class="sub" href="app.html" style="border-top-color:#3a86ff"><b>Electricity</b><span>2 experiments</span></a>
+ </div>
+</section>
+
+<section id="featured">
+ <div class="sh"><h2>A few to start with</h2><p>Open any of these and change one thing. That’s the whole method.</p></div>
+ <div class="grid">
+  <a class="card" href="app.html#projectile"><div class="thumb" style="background:#e4572e22"><svg viewBox="0 0 250 110" width="100%" height="130" preserveAspectRatio="xMidYMid slice"><g fill="none" stroke="#e4572e" stroke-width="4"><path d="M20 95Q120 -10 225 95"/><circle cx="120" cy="30" r="9" fill="#e4572e"/></g></svg></div><div class="b"><h3>Cannon Range</h3><span class="tag" style="color:#e4572e">Physics</span><p>Aim, change gravity and hit the target.</p></div></a>
+  <a class="card" href="app.html#gas"><div class="thumb" style="background:#1b998b22"><svg viewBox="0 0 250 110" width="100%" height="130" preserveAspectRatio="xMidYMid slice"><g fill="none" stroke="#1b998b" stroke-width="4"><rect x="40" y="15" width="160" height="80"/><circle cx="80" cy="40" r="6" fill="#3a86ff"/><circle cx="130" cy="70" r="6" fill="#e4572e"/><circle cx="160" cy="35" r="6" fill="#f2c14e"/><circle cx="100" cy="75" r="6" fill="#3a86ff"/></g></svg></div><div class="b"><h3>Gas Chamber</h3><span class="tag" style="color:#1b998b">Chemistry</span><p>Heat the gas, squeeze the piston, watch pressure.</p></div></a>
+  <a class="card" href="app.html#kepler"><div class="thumb" style="background:#7b5cd622"><svg viewBox="0 0 250 110" width="100%" height="130" preserveAspectRatio="xMidYMid slice"><g fill="none" stroke="#7b5cd6" stroke-width="4"><ellipse cx="125" cy="55" rx="100" ry="38"/><circle cx="168" cy="55" r="9" fill="#f2c14e"/><path d="M168 55L218 38L224 58Z" fill="#7b5cd6" fill-opacity=".5"/><circle cx="224" cy="55" r="5" fill="#7b5cd6"/></g></svg></div><div class="b"><h3>Kepler Orbits</h3><span class="tag" style="color:#7b5cd6">Astronomy</span><p>Stretch an orbit and see why planets speed up.</p></div></a>
+  <a class="card" href="app.html#transit"><div class="thumb" style="background:#7b5cd622"><svg viewBox="0 0 250 110" width="100%" height="130" preserveAspectRatio="xMidYMid slice"><g fill="none" stroke="#7b5cd6" stroke-width="4"><circle cx="95" cy="38" r="26" fill="#f2c14e"/><circle cx="108" cy="43" r="9" fill="#4a3b8f"/><path d="M14 95H80L92 104H128L140 95H236"/></g></svg></div><div class="b"><h3>Exoplanet Transit</h3><span class="tag" style="color:#7b5cd6">Astronomy</span><p>Find hidden planets by the dip in starlight.</p></div></a>
+  <a class="card" href="app.html#evolve"><div class="thumb" style="background:#2f9e4422"><svg viewBox="0 0 250 110" width="100%" height="130" preserveAspectRatio="xMidYMid slice"><g fill="none" stroke="#2f9e44" stroke-width="4"><circle cx="70" cy="60" r="16" fill="#2f9e44"/><circle cx="125" cy="45" r="16" fill="#a7dcb2"/><circle cx="180" cy="70" r="16" fill="#1d5e2b"/></g></svg></div><div class="b"><h3>Bunny Evolution</h3><span class="tag" style="color:#2f9e44">Biology</span><p>Watch fur colour evolve as a predator hunts.</p></div></a>
+  <a class="card" href="app.html#lissa"><div class="thumb" style="background:#d99a0022"><svg viewBox="0 0 250 110" width="100%" height="130" preserveAspectRatio="xMidYMid slice"><g fill="none" stroke="#d99a00" stroke-width="4"><path d="M125 55C170 5 215 5 215 55C215 105 170 105 125 55C80 5 35 5 35 55C35 105 80 105 125 55Z"/></g></svg></div><div class="b"><h3>Curve Dancer</h3><span class="tag" style="color:#d99a00">Math</span><p>Two waves at right angles draw looping curves.</p></div></a>
+ </div>
+ <p style="margin-top:26px"><a class="btn alt" href="app.html">Browse all 38 experiments</a></p>
+</section>
+
+<section>
+ <div class="why">
+  <div><h3>Hands first</h3><p>Every experiment starts running. You change a slider or drag a part and the result is on screen straight away.</p></div>
+  <div><h3>Runs anywhere</h3><p>Everything works in the browser on a laptop, tablet or phone. Nothing to download, nothing to log into.</p></div>
+  <div><h3>Made for asking why</h3><p>Each simulation has a short prompt and live numbers, so a click turns into a question you can test.</p></div>
+ </div>
+</section>
+
+<div class="cta"><h2>Pick an experiment and break it.</h2><p>Thirty-eight experiments are waiting, and every one is free.</p><a class="btn" href="app.html">Open SciLab</a></div>
+
+<footer><span>© Rohit Kattimani, 2026</span><span>SciLab is an independent project. All simulations are original.</span></footer>
+</div>
+
+<script>
+(function(){
+const cv=document.getElementById('hero'),g=cv.getContext('2d');let W=0,H=0,th1,th2,w1,w2,tr=[];
+function size(){const d=window.devicePixelRatio||1;W=cv.clientWidth;H=cv.clientHeight;cv.width=W*d;cv.height=H*d;g.setTransform(d,0,0,d,0,0)}
+function start(){th1=Math.PI*(.55+Math.random()*.45);th2=Math.PI*(.4+Math.random()*.9);w1=w2=0;tr=[]}
+function col(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim()}
+function acc(){const G=9.8,d=th1-th2,den=3-Math.cos(2*d);
+ return[(-3*G*Math.sin(th1)-G*Math.sin(th1-2*th2)-2*Math.sin(d)*(w2*w2+w1*w1*Math.cos(d)))/den,2*Math.sin(d)*(2*w1*w1+2*G*Math.cos(th1)+w2*w2*Math.cos(d))/den]}
+let last=performance.now();
+function frame(t){const dt=Math.min(.033,(t-last)/1000);last=t;
+ if(!matchMedia('(prefers-reduced-motion:reduce)').matches||tr.length<2){for(let i=0;i<30;i++){const h=dt/30,[a1,a2]=acc();w1+=a1*h;w2+=a2*h;th1+=w1*h;th2+=w2*h}}
+ const L=Math.min(W,H)*.22,px=W/2,py=H*.42,x1=px+L*Math.sin(th1),y1=py+L*Math.cos(th1),x2=x1+L*Math.sin(th2),y2=y1+L*Math.cos(th2);
+ tr.push([x2,y2]);if(tr.length>260)tr.shift();
+ g.clearRect(0,0,W,H);g.lineCap='round';
+ for(let i=1;i<tr.length;i++){g.strokeStyle=col('--teal');g.globalAlpha=i/tr.length*.9;g.lineWidth=1+i/tr.length*3;g.beginPath();g.moveTo(...tr[i-1]);g.lineTo(...tr[i]);g.stroke()}
+ g.globalAlpha=1;const ink=col('--ink');g.strokeStyle=ink;g.lineWidth=3;g.beginPath();g.moveTo(px,py);g.lineTo(x1,y1);g.lineTo(x2,y2);g.stroke();
+ g.fillStyle=ink;g.fillRect(px-26,py-8,52,8);
+ g.fillStyle=col('--gold');g.beginPath();g.arc(x1,y1,13,0,7);g.fill();g.stroke();
+ g.fillStyle=col('--cop');g.beginPath();g.arc(x2,y2,15,0,7);g.fill();g.stroke();
+ requestAnimationFrame(frame)}
+cv.addEventListener('pointerdown',start);addEventListener('resize',size);size();start();requestAnimationFrame(frame);
+})();
+</script>
+</body></html>
