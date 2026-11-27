@@ -1,8 +1,8 @@
-# SciLab
+# SciLabs
 
 Interactive science simulations that run in the browser. Drag a pendulum, heat a gas, launch a planet, and watch what happens.
 
-SciLab has 38 hands-on experiments across six subjects. Every experiment starts running straight away, has sliders you can also type numbers into, shows live readouts, and comes with a short prompt to get you asking why.
+SciLabs has 38 hands-on experiments across six subjects. Every experiment starts running straight away, has sliders you can also type numbers into, shows live readouts, and comes with a short prompt to get you asking why.
 
 ## Experiments
 
