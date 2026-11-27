@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>SciLab – interactive science simulations</title>
+<title>SciLabs – interactive science simulations</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Figtree:wght@400;600&display=swap">
 <style>
 :root{--bg:#eef3ee;--grid:#d9e3d9;--ink:#14213d;--mut:#56637a;--card:#fff;--line:#c4d1c4;--cop:#e4572e;--teal:#1b998b;--gold:#f2c14e;--sky:#3a86ff;--cv:#fbfdfb;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -365,15 +365,15 @@ function thumb(sm){const c=SUBJ[sm.sub];return `<div class="thumb" style="backgr
  circuit:'<rect x="40" y="25" width="170" height="60"/><path d="M95 25l8-12 14 24 14-24 14 24 8-12" stroke-width="3"/>'}[sm.id]||(sm.pl?curveThumb(sm):sm.th||'')}</g></svg></div>`}
 function home(){cancelAnimationFrame(raf);cur=null;
  const list=SIMS.filter(s=>(filt=='All'||s.sub==filt)&&(s.name+s.desc+s.sub).toLowerCase().includes(q));
- app.innerHTML=`<a class="brand" href="#">${logo}SciLab</a>
+ app.innerHTML=`<a class="brand" href="#">${logo}SciLabs</a>
  <header class="hero"><h1>Change one thing. Watch what happens.</h1><p>Free, hands-on simulations for physics, chemistry and electricity. Drag, tweak and break things. That’s how science sticks.</p></header>
  <div class="bar">${['All',...Object.keys(SUBJ)].map(f=>`<button class="chip" aria-pressed="${f==filt}" data-f="${f}">${f}</button>`).join('')}<input type="search" placeholder="Search simulations" value="${q}" aria-label="Search simulations"></div>
  <div class="grid">${list.map(s=>`<a class="card" href="#${s.id}">${thumb(s)}<div class="b"><h3>${s.name}</h3><span class="tag" style="color:${SUBJ[s.sub]}">${s.sub}</span><p>${s.desc}</p></div></a>`).join('')||'<p>No simulations match. Try a different word or choose All.</p>'}</div>
- <p class="foot">SciLab is an independent project with simulations written from scratch. Inspired by the open-science spirit of university teaching tools.</p>`;
+ <p class="foot">SciLabs is an independent project with simulations written from scratch. Inspired by the open-science spirit of university teaching tools.</p>`;
  app.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{filt=b.dataset.f;home()});
  const inp=app.querySelector('input');inp.oninput=()=>{q=inp.value.toLowerCase();const p=inp.selectionStart;home();const n=app.querySelector('input');n.focus();n.setSelectionRange(p,p)}}
 function open(sm){cancelAnimationFrame(raf);cur=sm;paused=false;const c={};sm.ctl.forEach(o=>c[o.k]=o.v);(sm.chk||[]).forEach(o=>c[o.k]=o.v);cur.c=c;cur.s=sm.init();
- app.innerHTML=`<div class="top"><a class="brand" href="#">${logo}SciLab</a><a class="back" href="#">All simulations</a></div>
+ app.innerHTML=`<div class="top"><a class="brand" href="#">${logo}SciLabs</a><a class="back" href="#">All simulations</a></div>
  <div style="margin-top:22px"><h2 style="font-size:clamp(30px,5vw,48px);font-weight:800;letter-spacing:-.03em">${sm.name}</h2><span class="tag" style="color:${SUBJ[sm.sub]}">${sm.sub}</span></div>
  <div class="sim"><div class="stage"><canvas id="cv" aria-label="${sm.name} simulation"></canvas></div>
  <div class="panel">${sm.ctl.map(o=>`<div class="ctl"><label for="c_${o.k}">${o.l}<span class="nb"><input class="num" id="o_${o.k}" type="number" min="${o.min}" max="${o.max}" step="${o.st}" value="${o.v}" aria-label="${o.l} value">${o.u}</span></label><input id="c_${o.k}" type="range" min="${o.min}" max="${o.max}" step="${o.st}" value="${o.v}"></div>`).join('')}
